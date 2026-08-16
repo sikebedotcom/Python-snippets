@@ -4,7 +4,9 @@ import random
 out_filename = "/path/to/orig/img_out.jpg"
 filename = "/path/to/orig/img.jpg"
 im = Image.open(filename)
+# im = Image.open(filename).convert("RGB")
 imnew = Image.new("RGB", (1280, 720))
+# The input image must be 6000 × 4000 pixels in size
 
 def getvals4(start_pos_x, start_pos_y):
 	rr5, gg5, bb5 = im.getpixel((start_pos_x+4, start_pos_y+4))
@@ -38,7 +40,7 @@ def getvals4(start_pos_x, start_pos_y):
 			bb2 += tb2
 			bb3 += tb3
 			bb4 += tb4
-	pattern_ab = random.choice("aaaa", "bbbb")
+	pattern_ab = random.choice(["aaaa", "bbbb"])
 	if (pattern_ab == "aaaa"):
 		tr, tg, tb = im.getpixel((start_pos_x,   start_pos_y+4))
 		rr1 += tr
@@ -170,6 +172,7 @@ def getvals4(start_pos_x, start_pos_y):
 		gg4 += tg
 		bb4 += tb
 	return (rr1//21, gg1//21, bb1//21, rr2//21, gg2//21, bb2//21, rr3//21, gg3//21, bb3//21, rr4//21, gg4//21, bb4//21)
+	# The handling of values less than 0 or greater than 255 has been omitted
 
 for xx in range(640):
 	for yy in range(360):
